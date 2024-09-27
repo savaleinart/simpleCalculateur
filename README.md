@@ -73,9 +73,9 @@ Une regex va essayer de trouver un motif 'terme1' 'operateur' 'terme2' dans la c
 On ne peut pas faire ça n'importe comment cependant, pour respecter la priorité des opérations. On va d'abord commencer par chercher les opérateurs + et - qui ne sont pas prioritaires, en partant de la droite (ça peut paraître contre intuitif mais comme on fait le calcul en partant du bas de l'arbre, les nœuds que l'on construit en premier seront ceux traités en dernier). A chaque fois qu'on trouve l'opérateur on construit un bout de l'arbre et on continue.
 Lorsqu'il n'y a plus aucune addition ou soustraction on utilise une autre regex pour trouver les multiplication et les divisions, et on continue la construction de l'arbre.
 
-Exemple: Prenons l'expression "1+3*4-9". 
-D'abord la première regex va match "1+3*4", "-" et "9" comme termes et opérateurs pour construire le premier étage de l'arbre. On continue ensuite à décomposer "1+3*4" (car "9" c'est déjà un nombre alors plus besoin de passer dessus), la regex va match "1", "+" et "3*4".
-Ensuite il n'y a plus d'addition/soustraction donc on passe sur l'autre regex qui va match "3", "*" et "4". L'arbre est maintenant correctement construit, la première opération effectuée sera "3*4", puis "1+12" et enfin "13-9" ce qui donnera un résultat de 4.
+Exemple: Prenons l'expression "1+3\*4-9". 
+D'abord la première regex va match "1+3\*4", "-" et "9" comme termes et opérateurs pour construire le premier étage de l'arbre. On continue ensuite à décomposer "1+3\*4" (car "9" c'est déjà un nombre alors plus besoin de passer dessus), la regex va match "1", "+" et "3\*4".
+Ensuite il n'y a plus d'addition/soustraction donc on passe sur l'autre regex qui va match "3", "\*" et "4". L'arbre est maintenant correctement construit, la première opération effectuée sera "3\*4", puis "1+12" et enfin "13-9" ce qui donnera un résultat de 4.
 
 # Conclusion
 Bien choisir une structure de données conditionne la façon dont on approche un problème. Et aussi des fois les regex c'est cool :)
